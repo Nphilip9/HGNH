@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="it.hgnh.hgnh.LoginController"
+           style="-fx-background-color: #EBEBEB;"
+           prefWidth="1050" prefHeight="720">
+
+    <!-- Card container -->
+    <HBox fx:id="card" maxWidth="820" maxHeight="500" prefWidth="820" prefHeight="500">
+
+        <!-- ── LEFT PANEL ────────────────────────────────────── -->
+        <VBox fx:id="leftPanel" prefWidth="490" alignment="CENTER"
+              style="-fx-background-color: #FFFFFF;">
+            <padding>
+                <Insets top="55" right="60" bottom="55" left="60"/>
+            </padding>
+            <spacing>18</spacing>
+
+            <!-- Title -->
+            <Label text="Welcome back," style="-fx-font-family: Georgia; -fx-font-weight: bold; -fx-font-size: 28; -fx-text-fill: #1A1A1A;"/>
+
+            <Region prefHeight="10"/>
+
+            <!-- Email field -->
+            <VBox spacing="4" prefWidth="260" alignment="CENTER_LEFT">
+                <TextField fx:id="emailField" promptText="EMAIL" prefWidth="260"
+                           style="-fx-background-color: transparent; -fx-border-color: transparent transparent #CCCCCC transparent; -fx-border-width: 0 0 1.5 0; -fx-font-size: 12; -fx-text-fill: #333333; -fx-prompt-text-fill: #AAAAAA; -fx-padding: 6 0 6 0;"/>
+            </VBox>
+
+            <!-- Password field -->
+            <VBox spacing="4" prefWidth="260" alignment="CENTER_LEFT">
+                <PasswordField fx:id="passwordField" promptText="PASSWORD" prefWidth="260"
+                               style="-fx-background-color: transparent; -fx-border-color: transparent transparent #CCCCCC transparent; -fx-border-width: 0 0 1.5 0; -fx-font-size: 12; -fx-text-fill: #333333; -fx-prompt-text-fill: #AAAAAA; -fx-padding: 6 0 6 0;"/>
+            </VBox>
+
+            <!-- Forgot password -->
+            <Label fx:id="forgotLabel" text="Forgot password?"
+                   style="-fx-font-family: 'Segoe UI'; -fx-font-size: 12; -fx-text-fill: #AAAAAA; -fx-cursor: hand;"
+                   onMouseEntered="#onForgotHover" onMouseExited="#onForgotExit"/>
+
+            <!-- Error label (hidden by default) -->
+            <Label fx:id="errorLabel" text="" wrapText="true" prefWidth="260"
+                   style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11; -fx-text-fill: #C0392B;"/>
+
+            <Region prefHeight="6"/>
+
+            <!-- Sign In button -->
+            <Button fx:id="signInBtn" text="SIGN IN"
+                    prefWidth="260" prefHeight="44"
+                    onAction="#onSignIn"
+                    onMouseEntered="#onSignInHover" onMouseExited="#onSignInExit"
+                    style="-fx-background-color: #D4A45A; -fx-background-radius: 25; -fx-border-radius: 25; -fx-font-family: 'Segoe UI'; -fx-font-weight: semi-bold; -fx-font-size: 13; -fx-text-fill: white; -fx-cursor: hand;"/>
+
+            <!-- Facebook button -->
+            <Button fx:id="fbBtn" prefWidth="260" prefHeight="44"
+                    onMouseEntered="#onFbHover" onMouseExited="#onFbExit"
+                    style="-fx-background-color: transparent; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #CCCCCC; -fx-border-width: 1.5; -fx-cursor: hand;">
+                <graphic>
+                    <TextFlow textAlignment="CENTER">
+                        <Text text="Connect with " style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13; -fx-fill: #555555;"/>
+                        <Text text="facebook" style="-fx-font-family: 'Segoe UI'; -fx-font-weight: bold; -fx-font-size: 13; -fx-fill: #3B5998;"/>
+                    </TextFlow>
+                </graphic>
+            </Button>
+
+        </VBox>
+
+        <!-- ── RIGHT PANEL ───────────────────────────────────── -->
+        <StackPane prefWidth="330">
+
+            <!-- Gradient background (simulated via CSS) -->
+            <Rectangle width="330" height="500"
+                       style="-fx-fill: linear-gradient(from 0% 0% to 100% 100%, #4A7B5E 0%, #C8A84B 40%, #B85C38 70%, #6B4E2A 100%);"/>
+
+            <!-- Dark tint -->
+            <Rectangle width="330" height="500"
+                       style="-fx-fill: rgba(0,0,0,0.38);"/>
+
+            <!-- Right content -->
+            <VBox spacing="12" alignment="CENTER">
+                <padding>
+                    <Insets left="30" right="30"/>
+                </padding>
+
+                <Label text="New here?"
+                       style="-fx-font-family: Georgia; -fx-font-weight: bold; -fx-font-size: 26; -fx-text-fill: white;"/>
+
+                <Label text="Sign up and discover great&#10;amount of new opportunities!"
+                       style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13; -fx-text-fill: rgba(255,255,255,0.90); -fx-text-alignment: center; -fx-alignment: center;"
+                       wrapText="true"/>
+
+                <Region prefHeight="22"/>
+
+                <Button fx:id="signUpBtn" text="SIGN UP"
+                        prefWidth="140" prefHeight="40"
+                        onAction="#onSignUp"
+                        onMouseEntered="#onSignUpHover" onMouseExited="#onSignUpExit"
+                        style="-fx-background-color: transparent; -fx-background-radius: 22; -fx-border-radius: 22; -fx-border-color: white; -fx-border-width: 2; -fx-font-family: 'Segoe UI'; -fx-font-weight: semi-bold; -fx-font-size: 13; -fx-text-fill: white; -fx-cursor: hand;"/>
+            </VBox>
+        </StackPane>
+
+    </HBox>
+</StackPane>
