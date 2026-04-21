@@ -1,5 +1,6 @@
 package it.hgnh.hgnh;
 
+import it.hgnh.hgnh.models.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +20,19 @@ public class HelloController {
 
             Stage stage = new Stage();
             stage.setTitle("Login");
-            stage.setScene(new Scene(root));
+            DashboardHomePane pane = new DashboardHomePane(
+                    new User("Philip", "neumair"),
+                    () -> {
+                        System.out.println("on leistungen");
+                    },
+                    () -> {
+                        System.out.println("on buchungen");
+                    },
+                    () -> {
+                        System.out.println("on neu buchung");
+                    }
+            );
+            stage.setScene(new Scene(pane, 1000, 700));
             stage.show();
 
         } catch (Exception e) {

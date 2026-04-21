@@ -1,5 +1,6 @@
 package it.hgnh.hgnh;
 
+import it.hgnh.hgnh.models.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -64,15 +65,11 @@ public class LoginController {
             showError("Invalid email or password.");
         }
     }
-
-    /** Sign Up button clicked (right panel) */
     @FXML
     protected void onSignUp() {
         // TODO: open a registration view
         showInfo("Redirecting to Sign Up…");
     }
-
-    // ── Hover handlers – Sign In button ──────────────────────────────────────
 
     @FXML protected void onSignInHover() {
         signInBtn.setStyle(
@@ -90,7 +87,6 @@ public class LoginController {
                         "-fx-font-size: 13; -fx-text-fill: white; -fx-cursor: hand;");
     }
 
-    // ── Hover handlers – Facebook button ─────────────────────────────────────
 
     @FXML protected void onFbHover() {
         fbBtn.setStyle(
@@ -106,7 +102,6 @@ public class LoginController {
                         "-fx-border-color: #CCCCCC; -fx-border-width: 1.5; -fx-cursor: hand;");
     }
 
-    // ── Hover handlers – Sign Up button ──────────────────────────────────────
 
     @FXML protected void onSignUpHover() {
         signUpBtn.setStyle(
@@ -126,7 +121,6 @@ public class LoginController {
                         "-fx-font-size: 13; -fx-text-fill: white; -fx-cursor: hand;");
     }
 
-    // ── Hover handlers – Forgot password label ───────────────────────────────
 
     @FXML protected void onForgotHover() {
         forgotLabel.setStyle(
@@ -140,7 +134,6 @@ public class LoginController {
                         "-fx-text-fill: #AAAAAA; -fx-cursor: hand;");
     }
 
-    // ── Helpers ──────────────────────────────────────────────────────────────
 
     private void showError(String msg) {
         errorLabel.setText(msg);
@@ -151,7 +144,6 @@ public class LoginController {
     }
 
     private void showInfo(String msg) {
-        // For now, use a simple alert dialog
         Alert alert = new Alert(Alert.AlertType.INFORMATION, msg, ButtonType.OK);
         alert.setHeaderText(null);
         alert.showAndWait();
