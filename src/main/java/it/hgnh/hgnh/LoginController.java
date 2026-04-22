@@ -10,12 +10,12 @@ import javafx.scene.paint.Color;
 public class LoginController {
 
     @FXML private HBox      card;
-    @FXML private TextField emailField;
+    @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private Label     forgotLabel;
     @FXML private Label     errorLabel;
     @FXML private Button    signInBtn;
-    @FXML private Button    fbBtn;
+    @FXML private Button    guestBtn;
     @FXML private Button    signUpBtn;
 
 
@@ -32,8 +32,8 @@ public class LoginController {
         clip.setArcHeight(16);
         card.setClip(clip);
 
-        emailField.focusedProperty().addListener((obs, wasF, isF) ->
-                emailField.setStyle(isF ? focusStyle() : baseStyle()));
+        usernameField.focusedProperty().addListener((obs, wasF, isF) ->
+                usernameField.setStyle(isF ? focusStyle() : baseStyle()));
 
         passwordField.focusedProperty().addListener((obs, wasF, isF) ->
                 passwordField.setStyle(isF ? focusStyle() : baseStyle()));
@@ -44,25 +44,20 @@ public class LoginController {
     /** Sign In button clicked */
     @FXML
     protected void onSignIn() {
-        String email    = emailField.getText().trim();
+        String username = usernameField.getText().trim();
         String password = passwordField.getText();
 
-        if (email.isEmpty() || password.isEmpty()) {
-            showError("Please enter your email and password.");
-            return;
-        }
-
-        if (!email.contains("@")) {
-            showError("Please enter a valid email address.");
+        if (username.isEmpty() || password.isEmpty()) {
+            showError("Please enter your username and password.");
             return;
         }
 
         // TODO: replace with real authentication logic
-        if (email.equals("user@example.com") && password.equals("password")) {
+        if (username.equals("admin") && password.equals("password")) {
             clearError();
-            showInfo("Login successful! Welcome, " + email);
+            showInfo("Login successful! Welcome, " + username);
         } else {
-            showError("Invalid email or password.");
+            showError("Invalid username or password.");
         }
     }
     @FXML
@@ -88,18 +83,27 @@ public class LoginController {
     }
 
 
-    @FXML protected void onFbHover() {
-        fbBtn.setStyle(
-                "-fx-background-color: #F5F5F5;" +
-                        "-fx-background-radius: 25; -fx-border-radius: 25;" +
-                        "-fx-border-color: #AAAAAA; -fx-border-width: 1.5; -fx-cursor: hand;");
+    @FXML protected void onGuest() {
+        // TODO: open the app in guest/limited mode
+        showInfo("Continuing as guest…");
     }
 
-    @FXML protected void onFbExit() {
-        fbBtn.setStyle(
+    @FXML protected void onGuestHover() {
+        guestBtn.setStyle(
+                "-fx-background-color: #F5F5F5;" +
+                        "-fx-background-radius: 25; -fx-border-radius: 25;" +
+                        "-fx-border-color: #AAAAAA; -fx-border-width: 1.5;" +
+                        "-fx-font-family: 'Segoe UI'; -fx-font-weight: semi-bold;" +
+                        "-fx-font-size: 13; -fx-text-fill: #555555; -fx-cursor: hand;");
+    }
+
+    @FXML protected void onGuestExit() {
+        guestBtn.setStyle(
                 "-fx-background-color: transparent;" +
                         "-fx-background-radius: 25; -fx-border-radius: 25;" +
-                        "-fx-border-color: #CCCCCC; -fx-border-width: 1.5; -fx-cursor: hand;");
+                        "-fx-border-color: #CCCCCC; -fx-border-width: 1.5;" +
+                        "-fx-font-family: 'Segoe UI'; -fx-font-weight: semi-bold;" +
+                        "-fx-font-size: 13; -fx-text-fill: #888888; -fx-cursor: hand;");
     }
 
 

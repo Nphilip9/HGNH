@@ -3,7 +3,8 @@ package it.hgnh.hgnh.models;
 public enum Gender {
     M("Male"),
     F("Female"),
-    D("Diverse");
+    D("Diverse"),
+    O("Other");
 
     private final String definition;
 

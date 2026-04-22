@@ -27,9 +27,9 @@
 
             <Region prefHeight="10"/>
 
-            <!-- Email field -->
+            <!-- Username field -->
             <VBox spacing="4" prefWidth="260" alignment="CENTER_LEFT">
-                <TextField fx:id="emailField" promptText="EMAIL" prefWidth="260"
+                <TextField fx:id="usernameField" promptText="USERNAME" prefWidth="260"
                            style="-fx-background-color: transparent; -fx-border-color: transparent transparent #CCCCCC transparent; -fx-border-width: 0 0 1.5 0; -fx-font-size: 12; -fx-text-fill: #333333; -fx-prompt-text-fill: #AAAAAA; -fx-padding: 6 0 6 0;"/>
             </VBox>
 
@@ -57,17 +57,12 @@
                     onMouseEntered="#onSignInHover" onMouseExited="#onSignInExit"
                     style="-fx-background-color: #D4A45A; -fx-background-radius: 25; -fx-border-radius: 25; -fx-font-family: 'Segoe UI'; -fx-font-weight: semi-bold; -fx-font-size: 13; -fx-text-fill: white; -fx-cursor: hand;"/>
 
-            <!-- Facebook button -->
-            <Button fx:id="fbBtn" prefWidth="260" prefHeight="44"
-                    onMouseEntered="#onFbHover" onMouseExited="#onFbExit"
-                    style="-fx-background-color: transparent; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #CCCCCC; -fx-border-width: 1.5; -fx-cursor: hand;">
-                <graphic>
-                    <TextFlow textAlignment="CENTER">
-                        <Text text="Connect with " style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13; -fx-fill: #555555;"/>
-                        <Text text="facebook" style="-fx-font-family: 'Segoe UI'; -fx-font-weight: bold; -fx-font-size: 13; -fx-fill: #3B5998;"/>
-                    </TextFlow>
-                </graphic>
-            </Button>
+            <!-- Proceed as Guest button -->
+            <Button fx:id="guestBtn" text="PROCEED AS GUEST"
+                    prefWidth="260" prefHeight="44"
+                    onAction="#onGuest"
+                    onMouseEntered="#onGuestHover" onMouseExited="#onGuestExit"
+                    style="-fx-background-color: transparent; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #CCCCCC; -fx-border-width: 1.5; -fx-font-family: 'Segoe UI'; -fx-font-weight: semi-bold; -fx-font-size: 13; -fx-text-fill: #888888; -fx-cursor: hand;"/>
 
         </VBox>
 

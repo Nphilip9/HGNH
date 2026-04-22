@@ -1,6 +1,5 @@
 package it.hgnh.hgnh;
 
-import it.hgnh.hgnh.models.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,13 +14,8 @@ public class HelloController {
     @FXML
     protected void onHelloButtonClick() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("login-view.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = new Stage();
-            stage.setTitle("Login");
-            DashboardHomePane pane = new DashboardHomePane(
-                    new User("Philip", "neumair"),
+            /*DashboardHomePane pane = new DashboardHomePane(
+                    new Administrator("Philip", "neumair"),
                     () -> {
                         System.out.println("on leistungen");
                     },
@@ -31,8 +25,15 @@ public class HelloController {
                     () -> {
                         System.out.println("on neu buchung");
                     }
-            );
-            stage.setScene(new Scene(pane, 1000, 700));
+            );*/
+
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login-view.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Login");
+            stage.setScene(new Scene(root));
             stage.show();
 
         } catch (Exception e) {
