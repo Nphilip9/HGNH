@@ -1,11 +1,15 @@
 package it.hgnh.hgnh;
 
+import it.hgnh.hgnh.models.Administrator;
+import it.hgnh.hgnh.models.Guest;
+import it.hgnh.hgnh.models.Receptionist;
 import it.hgnh.hgnh.models.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 public class LoginController {
 
@@ -48,18 +52,43 @@ public class LoginController {
         String password = passwordField.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
-            showError("Please enter your username and password.");
+            showError("Bitte Benutzername und Passwort eingeben.");
             return;
         }
 
-        // TODO: replace with real authentication logic
-        if (username.equals("admin") && password.equals("password")) {
-            clearError();
-            showInfo("Login successful! Welcome, " + username);
-        } else {
-            showError("Invalid username or password.");
+        try {
+            Stage current = (Stage) signInBtn.getScene().getWindow();
+
+            if (username.equals("admin") && password.equals("admin123")) {
+                Administrator admin = new Administrator("Hotel", "Administrator");
+                new AdminView(admin).start(new Stage());
+                current.close();
+            } else if (username.equals("rezeption") && password.equals("rezept123")) {
+                Receptionist receptionist = new Receptionist("Klaus", "Huber");
+                new ReceptionistView(receptionist).start(new Stage());  // ReceptionistView wenn vorhanden
+                current.close();
+            } else {
+                showError("Ungültiger Benutzername oder Passwort.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            showError("Fehler beim Öffnen der Ansicht.");
         }
     }
+
+    @FXML
+    protected void onGuest() {
+        try {
+            Stage current = (Stage) guestBtn.getScene().getWindow();
+            Guest guest = new Guest("Gast", "Benutzer", "");
+            new UserView(guest).start(current);  // UserView wenn vorhanden
+            current.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     @FXML
     protected void onSignUp() {
         // TODO: open a registration view
@@ -80,12 +109,6 @@ public class LoginController {
                         "-fx-background-radius: 25; -fx-border-radius: 25;" +
                         "-fx-font-family: 'Segoe UI'; -fx-font-weight: semi-bold;" +
                         "-fx-font-size: 13; -fx-text-fill: white; -fx-cursor: hand;");
-    }
-
-
-    @FXML protected void onGuest() {
-        // TODO: open the app in guest/limited mode
-        showInfo("Continuing as guest…");
     }
 
     @FXML protected void onGuestHover() {
