@@ -2,6 +2,8 @@ package it.hgnh.hgnh.models;
 
 import java.util.ArrayList;
 
+//Test
+
 public class Guest extends User {
     private String IDCardNumber, placeOfBirth, dateOfBirth, gender;
 
