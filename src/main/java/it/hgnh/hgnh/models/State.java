@@ -1,5 +1,8 @@
 package it.hgnh.hgnh.models;
 
+/**
+ * Define the state of a room or a reservation.
+ */
 public enum State {
     OCCUPIED,
     AVAILABLE,

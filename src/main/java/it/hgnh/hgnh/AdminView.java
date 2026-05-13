@@ -3,21 +3,17 @@ package it.hgnh.hgnh;
 import it.hgnh.hgnh.models.Administrator;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-/**
- * Hauptfenster für den Administrator.
- *
- * Rechte laut Lastenheft:
- *  - Alle Buchungen einsehen, bearbeiten, löschen
- *  - Keine eigene Buchung vornehmen
- *  - Rezeptionisten einstellen und entlassen
- */
+import java.io.IOException;
+
 public class AdminView extends Application {
 
     private final Administrator admin;
@@ -25,6 +21,7 @@ public class AdminView extends Application {
 
     /**
      * Konstruktor für den normalen Anwendungsfall (Login → AdminView).
+     * @param admin Administrator
      */
     public AdminView(Administrator admin) {
         this.admin = admin;
@@ -53,8 +50,10 @@ public class AdminView extends Application {
         stage.show();
     }
 
-    // ── Sidebar ───────────────────────────────────────────────────────────
-
+    /**
+     * Builds the sidebar with navigation buttons.
+     * @param stage Stage: Only used to close the stage after successful logout
+     */
     private void buildSidebar(Stage stage) {
         VBox sidebar = new VBox(0);
         sidebar.setPrefWidth(230);
@@ -111,7 +110,18 @@ public class AdminView extends Application {
                         "-fx-font-size: 13px; -fx-padding: 10 16;" +
                         "-fx-alignment: center-left; -fx-cursor: hand;");
         logoutBtn.setOnAction(e -> {
-            new LoginView().start(new Stage());
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login-view.fxml"));
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+            stage.setTitle("Login");
+            stage.setScene(new Scene(root));
+            stage.show();
             stage.close();
         });
         bottomBox.getChildren().add(logoutBtn);
@@ -120,8 +130,9 @@ public class AdminView extends Application {
         root.setLeft(sidebar);
     }
 
-    // ── Top-Bar ───────────────────────────────────────────────────────────
-
+    /**
+     * Builds the top bar of the admin view.
+     */
     private void buildTopBar() {
         HBox topBar = new HBox();
         topBar.setPadding(new Insets(16, 28, 16, 28));
@@ -136,8 +147,9 @@ public class AdminView extends Application {
         root.setTop(topBar);
     }
 
-    // ── Inhalts-Seiten ────────────────────────────────────────────────────
-
+    /**
+     * Dashboard: Zimmer, Aktive Buchungen, Rezeptionisten, Einnahmen heute
+     */
     private void showDashboard() {
         VBox content = baseContent("Dashboard");
 
@@ -157,6 +169,9 @@ public class AdminView extends Application {
         setContent(content);
     }
 
+    /**
+     * Shows the list of receptionists on the GUI.
+     */
     private void showReceptionists() {
         VBox content = baseContent("Rezeptionisten verwalten");
 
@@ -205,6 +220,9 @@ public class AdminView extends Application {
         setContent(content);
     }
 
+    /**
+     * Shows the list of guests on the GUI.
+     */
     private void showBookings() {
         VBox content = baseContent("Alle Buchungen");
 
@@ -246,6 +264,9 @@ public class AdminView extends Application {
         setContent(content);
     }
 
+    /**
+     * Shows the list of services offered by the hotel.
+     */
     private void showServices() {
         VBox content = baseContent("Zimmer & Leistungen");
 
@@ -288,7 +309,6 @@ public class AdminView extends Application {
                 col("Preis",            d -> d[2]),
                 col("Plätze gesamt",    d -> d[3])
         );
-        // Laut Lastenheft: Restaurant, Sauna, Spielhalle, Schwimmbad
         zusatzTable.getItems().addAll(
                 new String[]{"Restaurant",  "12:00–14:00 / 18:00–22:00", "25 €/Person",  "50"},
                 new String[]{"Sauna",       "15:00–22:00",               "3 €/Stunde",   "10"},
@@ -301,6 +321,9 @@ public class AdminView extends Application {
         setContent(content);
     }
 
+    /**
+     * Shows the list of guests on the GUI.
+     */
     private void showReports() {
         VBox content = baseContent("Berichte");
 
@@ -318,8 +341,10 @@ public class AdminView extends Application {
         setContent(content);
     }
 
-    // ── Dialoge ───────────────────────────────────────────────────────────
-
+    /**
+     * Shows the list of guests on the GUI.
+     * @param data String[]: Receptionists used for displaying selected Receptionist, if null you can create a new one.
+     */
     private void showReceptionistDialog(String[] data) {
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle(data == null ? "Neuer Rezeptionist" : "Rezeptionist bearbeiten");
@@ -345,6 +370,10 @@ public class AdminView extends Application {
         dialog.showAndWait();
     }
 
+    /**
+     * Remove or edit a booking.
+     * @param data String[]: Data used for displaying selected booking
+     */
     private void showBookingEditDialog(String[] data) {
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Buchung bearbeiten – " + data[0]);
@@ -371,8 +400,10 @@ public class AdminView extends Application {
         dialog.showAndWait();
     }
 
-    // ── Hilfsmethoden ─────────────────────────────────────────────────────
-
+    /**
+     * Builds the booking table.
+     * @return TableView<String[]>: Table with all bookings.
+     */
     private TableView<String[]> buildBookingTable() {
         TableView<String[]> table = new TableView<>();
         table.setStyle("-fx-background-color: #161b22;");

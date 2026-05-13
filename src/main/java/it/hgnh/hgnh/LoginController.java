@@ -81,7 +81,7 @@ public class LoginController {
         try {
             Stage current = (Stage) guestBtn.getScene().getWindow();
             Guest guest = new Guest("Gast", "Benutzer", "");
-            new UserView(guest).start(current);  // UserView wenn vorhanden
+            new UserView(guest).start(current);
             current.close();
         } catch (Exception e) {
             e.printStackTrace();
